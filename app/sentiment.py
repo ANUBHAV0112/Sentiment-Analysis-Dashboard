@@ -30,3 +30,5 @@ if __name__ == "__main__":
     for text in sample_texts:
         result = get_sentiment(text)
         print(f"{result['text']} → {result['sentiment'].upper()} ({result['score']})")
+
+
