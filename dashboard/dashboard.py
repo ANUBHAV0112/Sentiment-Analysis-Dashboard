@@ -1,11 +1,11 @@
 # dashboard/dashboard.py
 
-import streamlit as st  # type: ignore
+import streamlit as st # type: ignore
 import pandas as pd
 import requests
-from streamlit_autorefresh import st_autorefresh  # type: ignore
+from streamlit_autorefresh import st_autorefresh # type: ignore
 import plotly.express as px
-from wordcloud import WordCloud  # type: ignore
+from wordcloud import WordCloud # type: ignore
 import matplotlib.pyplot as plt
 
 API_URL = "http://localhost:5000/analyze"
@@ -56,34 +56,21 @@ try:
         df = df[df["sentiment"] == sentiment_filter]
 
     # Headlines table
-    st.write("### 🗞️ Latest Headlines and Sentiment")
-    st.dataframe(df[['text', 'sentiment', 'score']].style.applymap(
-        lambda val: 'color: green' if val == 'positive' else 'color: red' if val == 'negative' else 'color: gray',
-        subset=['sentiment']
-    ))
+    st.write("### Latest Headlines and Sentiment")
+    st.dataframe(df[['text', 'sentiment', 'score']])
 
-    # Sentiment distribution bar chart (Plotly)
-    st.write("### 📊 Sentiment Distribution (Bar Chart)")
-    sentiment_counts = df['sentiment'].value_counts().reset_index()
-    sentiment_counts.columns = ['sentiment', 'count']
-    fig_bar = px.bar(sentiment_counts, x='sentiment', y='count', color='sentiment',
-                     color_discrete_map={'positive': 'green', 'negative': 'red', 'neutral': 'gray'})
-    st.plotly_chart(fig_bar)
+    # Sentiment distribution bar chart
+    sentiment_counts = df['sentiment'].value_counts()
+    st.write("### Sentiment Distribution")
+    st.bar_chart(sentiment_counts)
 
     # Pie chart
-    st.write("### 🍰 Sentiment Proportions (Pie Chart)")
-    fig_pie = px.pie(df, names='sentiment', title='Sentiment Proportions', hole=0.4,
-                     color='sentiment', color_discrete_map={'positive': 'green', 'negative': 'red', 'neutral': 'gray'})
+    st.write("### Sentiment Proportions")
+    fig_pie = px.pie(df, names='sentiment', title='Sentiment Proportions', hole=0.4)
     st.plotly_chart(fig_pie)
 
-    # Compound score histogram
-    st.write("### 📈 Compound Score Distribution")
-    fig_hist = px.histogram(df, x='score', nbins=20, title='Distribution of Compound Scores',
-                            color_discrete_sequence=['#636EFA'])
-    st.plotly_chart(fig_hist)
-
     # Word cloud
-    st.write("### ☁️ Word Cloud of Headlines")
+    st.write("### Word Cloud of Headlines")
     text = ' '.join(df['text'])
     wordcloud = WordCloud(width=800, height=400, background_color='black').generate(text)
     fig, ax = plt.subplots()
