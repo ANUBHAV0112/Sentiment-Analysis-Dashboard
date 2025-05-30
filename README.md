@@ -14,6 +14,4 @@ This project is a **real-time sentiment analysis dashboard** that collects news 
 
 ---
 
-## 📂 Project Structure
-
-sentiment-analysis-dashboard/README.md
+![Sentiment Dashboard Output](../Output.png)
