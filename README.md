@@ -16,5 +16,9 @@ This project is a **real-time sentiment analysis dashboard** that collects news 
 
 ![Sentiment Dashboard Output](/Screenshot/Output.png)
 
+<<<<<<< HEAD
 
 ---
+=======
+---
+>>>>>>> c3b96091 (first)
