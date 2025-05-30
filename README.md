@@ -16,4 +16,5 @@ This project is a **real-time sentiment analysis dashboard** that collects news 
 
 ![Sentiment Dashboard Output](Output.png)
 
+
 ---
